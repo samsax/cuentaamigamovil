@@ -1,0 +1,47 @@
+
+<ion-view view-title="REGÍSTRATE" class="main" >
+<ion-content>      
+<form action="action_page.php" name"formregister">
+  <div class="list">
+    <div id='nombre_e' class='error'>Nombre invalido</div>
+     <label class="item item-input">
+                    <span class="input-label">Nombre</span>
+          <input type="text" ng-model="user.nombre">
+    </label>
+
+    <div id='nombre_e' class='error'>User Name invalido</div>
+     <label class="item item-input">
+                    <span class="input-label">User Name</span>
+          <input type="text" ng-model="user.user_name">
+    </label>
+    
+  
+    <div id='correo_e' class='error'>Correo invalido</div>
+    <label class="item item-input">
+                    <span class="input-label">Correo electronico</span>
+          <input type='email'  ng-model="user.email">
+    </label>
+    
+    <div id='contrasena_e' class='error'>Contraseña invalida</div>
+    <label class="item item-input">
+                    <span class="input-label">Contraseña</span>
+          <input type='password'  ng-model="user.password">
+    </label>
+    <div id='confirmacion_contrasena_e' class='error'>Verifique contraseña</div>
+    <label class="item item-input">
+            <span class="input-label">Confirme contraseña</span>
+          <input type='password'  ng-model="user.checkPassword">
+    </label>
+
+   <br>
+
+    <input class= "button  button-block button-positive" type= "submit" value="Registrar" > 
+  
+ </div>
+</form>
+
+{{users}}
+</ion-content>
+</ion-view>
+
+

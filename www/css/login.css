@@ -1,0 +1,30 @@
+﻿*, body {
+    margin: 0;
+    padding: 0;
+}
+
+
+.login {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+
+.item-input .icon {
+    width: auto;
+}
+
+a {
+    color: black;
+}
+
+h1 {
+    color: black;
+    font-family: "Times New Roman", Georgia, Serif;
+}
+
+div.taxi-club-label {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+

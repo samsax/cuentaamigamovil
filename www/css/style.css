@@ -1,0 +1,76 @@
+﻿/* Empty. Add your own CSS if you like */
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Raleway:300,500,600,700,900,400);
+
+.main {
+    
+}
+
+span {
+    color: #000;
+    font-family: 'Raleway',Arial, Helvetica, sans-serif;
+}
+
+.img_bienvenido {
+	  width:100%;
+    height:100%;
+    width: auto;    
+}
+
+
+.contact {
+  font-size: 14px;
+  width:340px;
+  margin: 50px auto;
+  border-radius: 10px;
+  
+}
+
+
+.slider-slide {
+  padding-top: 40px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  
+}
+
+.scroll {
+    height: 100%;
+}
+ 
+.error {
+    border: none;
+    display: inline-block;
+    visibility: hidden;
+    color: #C03;
+    font-size: 12px;
+}
+
+
+.circulo {
+     width: 50px;
+     height: 50px;
+     border-radius: 30%;
+     margin-right: 20px;
+}
+
+.col-md-12 h2 {
+  padding: 3px;
+}
+
+.slide-main {
+  height: 300px;
+  
+}
+
+.slider-slide {
+  padding: 0px;
+}
+
+.slide-main img {
+  padding: 50px;
+}
+

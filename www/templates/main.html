@@ -1,0 +1,39 @@
+<ion-view view-title=" INICIO" >
+    <ion-content>          	
+
+    		<br/>
+            <h1 class="title text-center">Sueldo</h1>
+          
+    		<br/>
+
+    		<center>
+				<label class="item item-input input-value">
+	                    <span class="input-label">SUELDO</span>
+	          			<input type="number" ng-model="account.sueldo">          			
+	    		</label>
+
+
+			    <multiselect
+			      header-text="Amigos"
+			      items="users"
+			      text-property="name"
+			      value-property="id"
+			      is-translate="false"
+			      text="Seleccione Amigos"
+			      modal-template-url="lib/ionic-multiselect/dist/templates/modal-template.html"
+			      template-url="lib/ionic-multiselect/dist/templates/item-template.html"
+			      value-changed="onValueChanged(name)">
+			    </multiselect>
+
+
+				<br/>
+				
+				<input class= "button  button-block button-positive button-search" ng-click="contabilizar()" value="Contabilizar" > 
+			</center>
+
+			<br/><br/><br/>
+
+			{{usersChecked}}
+		
+    </ion-content>    
+</ion-view>

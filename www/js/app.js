@@ -57,7 +57,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ioni
          }
      });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/register');
+    $urlRouterProvider.otherwise('/app/main');
 
 });
 

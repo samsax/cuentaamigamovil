@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="false" ng-controller="MenuCtrl">
   <ion-side-menu-content >
     <ion-nav-bar class="bar-dark">
       <!--<ion-nav-back-button>
@@ -25,7 +25,7 @@
             </div>
              <div class="col-md-12">
                  <h2>{{ 'KEY_WELCOME' | translate }},</h2>
-                 <h2>Victor César!</h2>
+                 <h2>{{USER_ROLES.name}}</h2>
             </div>
           </div>          
         </ion-item>
@@ -33,15 +33,16 @@
           <i class="icon ion-home"></i>
           {{ 'KEY_START' | translate }}
         </ion-item>        
+        <ion-item menu-close href="#/app/history">
+          <i class="icon ion-person-stalker"></i>
+          {{ 'KEY_HISTORY' | translate }}
+      </ion-item>
         <ion-item menu-close href="#/app/register">
           <i class="icon ion-person-stalker"></i>
           {{ 'KEY_REGISTER' | translate }}
         </ion-item>
       </ion-list>
-      <ion-item menu-close href="#/app/history">
-          <i class="icon ion-person-stalker"></i>
-          {{ 'KEY_HISTORY' | translate }}
-        </ion-item>
+      
       </ion-list>
     </ion-content>
 

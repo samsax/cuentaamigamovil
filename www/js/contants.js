@@ -4,5 +4,5 @@ angular.module('starter')
   name: '',
   admin: 'admin_role',
   public: 'public_role',
-  authorized: true
+  authorized: false
 });

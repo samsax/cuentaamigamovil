@@ -21,16 +21,17 @@ angular.module('starter')
 
 			angular.forEach($scope.users, function(value, key) {
 				if(value.checked != undefined && value.checked){
-			   		$scope.usersChecked.push({id_pago: USER_ROLES.id, id_debe: value.id, cuenta: $scope.account.sueldo/total});
+			   		$scope.usersChecked.push({usuarioPago: USER_ROLES.id, usuarioDebe: value.id, cantidad: $scope.account.sueldo/total});
 				}
-			});
+			});			
 			salve($scope.usersChecked);
 		}
 
 		var salve = function(users){
 			$http({
 			  method: 'POST',
-			  url: 'http://cuentaamiga-samsax.c9users.io:8080/api/Usuarios'
+			  url: 'http://cuentaamiga-samsax.c9users.io:8080/api/Cuenta',
+			  data: users
 			}).then(function successCallback(response) {
 			    $ionicPopup.confirm({
 			     title: 'Éxito',

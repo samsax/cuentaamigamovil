@@ -1,8 +1,21 @@
 angular.module('starter')
-	.controller('HistoryCtrl', function($scope) {
+	.controller('HistoryCtrl', function($scope, $http, $ionicPopup) {
 
-		$scope.accounts = [{ 'id_user1':'Victor', 'id_user2':'Samuel', 'cuenta':'30.00' }, { 'id_user1':'Victor', 'id_user2':'Samuel', 'cuenta':'50.00' }, { 'id_user1':'Samuel', 'id_user2':'Victor', 'cuenta':'30.00' } ];
+		$scope.accounts = [];
 
-		
+		var searchHistory = function() {
+			$http({
+				method: 'GET',
+				url: 'http://cuentaamiga-samsax.c9users.io:8080/api/Cuenta',
+			}).then(function successCallback(response) {
+				$scope.accounts = response.data;
+			}, function errorCallback(response) {
+				$ionicPopup.confirm({
+					title: 'Error',
+					template: 'Error en el servidor.'
+				});
+			});
+		}
+		searchHistory();
 
 	});

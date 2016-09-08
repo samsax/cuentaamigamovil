@@ -1,10 +1,12 @@
 <ion-view view-title=" Cuentas a Pagar" >
     <ion-content>          	
-    	     
+
+
            <br/>   
            <h2 class="title text-center">Cantidad</h2>
+
            <div class="card ">
-                      <div class="item item-divider  bar bar-balanced">
+                      <div class="item item-divider  bar bar-calm">
                             Total a Pagar:
                       </div>
 
@@ -24,21 +26,28 @@
                       </div>
                   </div>
             <center>
-            <button class= "button  button-block button-balanced button-search" ng-click="contabilizar()">Pagar</button>
+            <button class= "button  button-block button-calm button-search" ng-click="contabilizar()">Pagar</button>
             </center>
     		<br/>
         <hr/>
             <h2 class="title text-center">Historico</h2>
 
-
             <div ng-repeat="object in accounts">
+                  
                   <div class="card ">
-                      <div class="item item-divider  bar bar-balanced">
-                            {{object.usuarioPago}} / {{object.usuarioDebe}}
+                      <div class="item item-divider  bar bar-positive" ng-if="totalPago.nombre == object.usuarioPago">
+                      <i class="icon ion-person"></i> {{object.usuarioPago}} <i class="icon ion-forward "></i>
+                        <i class="icon ion-person"></i> {{object.usuarioDebe}}
+                      </div>
+                      <div class="item item-divider  bar bar-royal" ng-if="totalDeb.nombre == object.usuarioPago">
+                        <i class="icon ion-person"></i>
+                        {{object.usuarioPago}} <i class="icon ion-forward"></i>
+                        <i class="icon ion-person"></i> {{object.usuarioDebe}}
                       </div>
 
                         <div class="item item-text-wrap">
-                              Cuenta: {{object.cantidad}}
+                              Cuenta: $ {{object.cantidad}}<br/>
+                              <div ng-if="object.fecha != null">Fecha: {{object.fecha}}</div> 
                         </div>
                   </div>
             </div>

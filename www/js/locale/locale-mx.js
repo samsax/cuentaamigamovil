@@ -15,6 +15,7 @@ angular.module('starter')
 
       'KEY_WELCOME': 'Bienvenido',
       'KEY_START': 'Inicio',
+      'KEY_ACCOUNT': 'Cuenta',
       'KEY_REGISTER': 'Registro',
       'KEY_CONTACT': 'Contacto',
       'KEY_HISTORY': 'Historico',

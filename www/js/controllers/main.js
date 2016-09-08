@@ -35,7 +35,7 @@ angular.module('starter')
 			});
 
 			angular.forEach($scope.users, function(value, key) {
-				if(value.checked != undefined && value.checked){
+				if(value.checked != undefined && value.checked && value.id != USER_ROLES.id){
 			   		$scope.usersChecked.push({usuarioPago: USER_ROLES.id, usuarioDebe: value.id, cantidad: $scope.account.sueldo/total});
 				}
 			});			
@@ -51,12 +51,12 @@ angular.module('starter')
 			}).then(function successCallback(response) {
 			    $ionicPopup.alert ({
 			     title: 'Éxito',
-			     template: 'Grabado con éxito.'
+			     template: 'Guardado con éxito.'
 				});
 			}, function errorCallback(response) {
 				    $ionicPopup.alert({
 				     title: 'Error',
-				     template: 'Error al grabar. ' + response
+				     template: 'Error al guardar. ' + response
 					});
 			});
 		};

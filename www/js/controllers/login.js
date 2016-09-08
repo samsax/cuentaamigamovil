@@ -17,18 +17,18 @@ angular.module('starter')
         };
 
         // Open the login modal
-        $scope.login = function() {
-
+        $scope.login = function(user, password) {
+            url = "http://cuentaamiga-samsax.c9users.io:8080/api/Usuarios/getlogin?nickname="+user+"&password="+password;
             $http({
                 method: 'GET',
-                url: 'http://cuentaamiga-samsax.c9users.io:8080/api/Usuarios/1',
+                url: url,
             }).then(function successCallback(response) {
-                USER_ROLES.id = response.data.id;
-                USER_ROLES.name = response.data.nombre;
+                USER_ROLES.id = response.data.id.id;
+                USER_ROLES.name = response.data.id.nombre;
                 USER_ROLES.authorized = true;                
             }, function errorCallback(response) {
                 console.log(response);
-                $ionicPopup.confirm({
+                $ionicPopup.alert({
                     title: 'Error',
                     template: 'No es possible logar. Data: ' + response.data + '. Status Text: ' + response.statusText
                 });

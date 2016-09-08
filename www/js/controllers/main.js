@@ -1,7 +1,7 @@
 angular.module('starter')
 	.controller('MainCtrl', function($scope, USER_ROLES, $ionicPopup, $http) {
 
-		$scope.users = [{ 'id': '1', 'name':'Victor Cesar'}, { 'id': '2','name':'Prash'}, { 'id': '3', 'name':'Zoara'}, { 'id': '4','name':'Daniel'} ];
+		$scope.users = [];
 		$scope.usersChecked = [];
 		$scope.account = {};
 
@@ -9,6 +9,21 @@ angular.module('starter')
 	        //Value return a array objects with items selected
 	        console.log(value);
 		};
+
+		var loadUsers = function() {
+			$http({
+				method: 'GET',
+				url: 'http://cuentaamiga-samsax.c9users.io:8080/api/Usuarios',
+			}).then(function successCallback(response) {
+				$scope.users = response.data;
+			}, function errorCallback(response) {
+				$ionicPopup.alert({
+					title: 'Error',
+					template: 'Error en el servidor.'
+				});
+			});
+		}
+		loadUsers();
 
 		$scope.contabilizar = function(){
 			$scope.usersChecked = [];
@@ -24,6 +39,7 @@ angular.module('starter')
 			   		$scope.usersChecked.push({usuarioPago: USER_ROLES.id, usuarioDebe: value.id, cantidad: $scope.account.sueldo/total});
 				}
 			});			
+			console.log($scope.usersChecked);
 			salve($scope.usersChecked);
 		}
 
@@ -33,12 +49,12 @@ angular.module('starter')
 			  url: 'http://cuentaamiga-samsax.c9users.io:8080/api/Cuenta',
 			  data: users
 			}).then(function successCallback(response) {
-			    $ionicPopup.confirm({
+			    $ionicPopup.alert ({
 			     title: 'Éxito',
 			     template: 'Grabado con éxito.'
 				});
 			}, function errorCallback(response) {
-				    $ionicPopup.confirm({
+				    $ionicPopup.alert({
 				     title: 'Error',
 				     template: 'Error al grabar. ' + response
 					});

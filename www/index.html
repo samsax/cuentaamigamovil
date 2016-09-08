@@ -57,7 +57,7 @@
                     <input type="password" ng-model="user.cpf" placeholder="Contraseña">
                 </label>
                 <br />
-                <button ng-click="login()" class="login button button-positive" type="submit">{{ 'KEY_LOGIN_IN' | translate }}</button>
+                <button ng-click="login(user.name, user.cpf)" class="login button button-positive" type="submit">{{ 'KEY_LOGIN_IN' | translate }}</button>
             </form>
             <br /><br />
             <div class="text-center"><a href="#/app/register">{{ 'KEY_REGISTER_NOW' | translate }}</a></div>

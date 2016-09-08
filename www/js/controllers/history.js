@@ -28,17 +28,19 @@ angular.module('starter')
 		var calculaCuenta = function(){
 			$scope.totalPago.cantidad = 0;
 			$scope.totalDeb.cantidad = 0;
+
+			var totalPago = 0, totalDeb = 0;
 			var userPago = $scope.accounts[0].usuarioPago,
 				userDebe = $scope.accounts[0].usuarioDebe;
 			for (var i = 0; i < $scope.accounts.length; i++) {
 				if(userPago == $scope.accounts[i].usuarioPago){
-					$scope.totalPago.cantidad += $scope.accounts[i].cantidad;
+					totalPago += $scope.accounts[i].cantidad;
 				}else{
-					$scope.totalDeb.cantidad += $scope.accounts[i].cantidad;
+					totalDeb += $scope.accounts[i].cantidad;
 				}
 			}
-			$scope.totalPago.cantidad = $scope.totalPago.cantidad - $scope.totalDeb.cantidad;
-			$scope.totalDeb.cantidad = $scope.totalDeb.cantidad - $scope.totalPago.cantidad;
+			$scope.totalPago.cantidad = totalPago - totalDeb;
+			$scope.totalDeb.cantidad = totalDeb - totalPago;
 		}
 
 		var loadUsers = function() {

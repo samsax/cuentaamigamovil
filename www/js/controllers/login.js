@@ -27,9 +27,10 @@ angular.module('starter')
                 USER_ROLES.name = response.data.nombre;
                 USER_ROLES.authorized = true;                
             }, function errorCallback(response) {
+                console.log(response);
                 $ionicPopup.confirm({
                     title: 'Error',
-                    template: 'No es possible logar.'
+                    template: 'No es possible logar. Data: ' + response.data + '. Status Text: ' + response.statusText
                 });
             });
 

@@ -62,6 +62,13 @@ angular.module('starter')
 			}).then(function successCallback(response) {
 				$scope.users = response.data;
 
+				for (var i = 0; i < $scope.users.length; i++) {
+					if(USER_ROLES.id == $scope.users[i].id){
+						$scope.users.splice(i, 1);
+						console.log(i, $scope.users);
+					}
+				}
+
 				for (var i = 0; i < $scope.accounts.length; i++) {
 					$scope.accounts[i].usuarioPago = searchUser($scope.accounts[i].usuarioPago);
 					$scope.accounts[i].usuarioDebe = searchUser($scope.accounts[i].usuarioDebe);
@@ -81,7 +88,8 @@ angular.module('starter')
 		searchHistory();
 
 		var limpiar = function() {
-			$scope.accounts = [];
+			$scope.accounts.totalPago = {};
+			$scope.accounts.totalDeb = {};
 			$scope.users = [];
 			$scope.totalPago = {};
 			$scope.totalDeb = {};

@@ -1,13 +1,16 @@
 <ion-view view-title=" Cuentas a Pagar" >
     <ion-content>          	
 
-          <select ng-model="accounts.userId">
-             <option  ng-repeat="user in users" value="{{user.id}}">
-                 {{user.nombre}}
-             </option>
-          </select>
+          <br/> 
+          <center>            
+            <select class="history-select" ng-model="accounts.userId">
+               <option  ng-repeat="user in users" value="{{user.id}}">
+                   {{user.nombre}}
+               </option>
+            </select>
+          </center>
           
-           <br/>   
+           
            <h2 class="title text-center">Cantidad</h2>
 
            <div class="card ">

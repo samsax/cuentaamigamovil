@@ -1,7 +1,12 @@
 <ion-view view-title=" Cuentas a Pagar" >
     <ion-content>          	
 
-
+          <select ng-model="accounts.userId">
+             <option  ng-repeat="user in users" value="{{user.id}}">
+                 {{user.nombre}}
+             </option>
+          </select>
+          
            <br/>   
            <h2 class="title text-center">Cantidad</h2>
 
@@ -26,7 +31,7 @@
                       </div>
                   </div>
             <center>
-            <button class= "button  button-block button-calm button-search" ng-click="contabilizar()">Pagar</button>
+            <button class= "button  button-block button-calm button-search" ng-click="pagar()">Atualizar</button>
             </center>
     		<br/>
         <hr/>
@@ -46,7 +51,7 @@
                       </div>
 
                         <div class="item item-text-wrap">
-                              Cuenta: $ {{object.cantidad}}<br/>
+                              Cuenta: $ {{(object.cantidad).formatMoney(2, '.', ',')}}<br/>
                               <div ng-if="object.fecha != null">Fecha: {{object.fecha}}</div> 
                         </div>
                   </div>

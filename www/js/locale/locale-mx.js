@@ -20,7 +20,10 @@ angular.module('starter')
       'KEY_CONTACT': 'Contacto',
       'KEY_HISTORY': 'Historico',
 
+      'KEY_MSG_USER_NOT_FOUND': 'Usuario no encontrado',
+
     });
 $translateProvider.preferredLanguage('es-MX');
 });
-// {{ 'KEY_EXEMPLE' | translate }}
+// HTML - {{ 'KEY_EXEMPLE' | translate }}
+// Controllers: $filter  - $filter('translate')('KEY_EXEMPLE')

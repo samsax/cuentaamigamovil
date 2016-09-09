@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('LoginCtrl', function($scope, $ionicModal, $timeout, USER_ROLES, $http, $ionicPopup) {
+    .controller('LoginCtrl', function($scope, $ionicModal, $timeout, USER_ROLES, $http, $ionicPopup, $filter) {
 
         // Form data for the login modal
         $scope.loginData = {};
@@ -18,16 +18,23 @@ angular.module('starter')
 
         // Open the login modal
         $scope.login = function(user, password) {
-            url = "http://cuentaamiga-samsax.c9users.io:8080/api/Usuarios/getlogin?nickname="+user+"&password="+password;
+            url = "http://cuentaamiga-samsax.c9users.io:8080/api/Usuarios/getlogin?nickname=" + user + "&password=" + password;
             $http({
                 method: 'GET',
                 url: url,
             }).then(function successCallback(response) {
-                USER_ROLES.id = response.data.id.id;
-                USER_ROLES.name = response.data.id.nombre;
-                USER_ROLES.authorized = true;                
+                if (response.data.id != null) {
+                    USER_ROLES.id = response.data.id.id;
+                    USER_ROLES.name = response.data.id.nombre;
+                    USER_ROLES.authorized = true;
+                } else {
+                    $ionicPopup.alert({
+                        title: 'Error',
+                        template: $filter('translate')('KEY_MSG_USER_NOT_FOUND')
+                    });
+                }
+
             }, function errorCallback(response) {
-                console.log(response);
                 $ionicPopup.alert({
                     title: 'Error',
                     template: 'No es possible logar. Data: ' + response.data + '. Status Text: ' + response.statusText

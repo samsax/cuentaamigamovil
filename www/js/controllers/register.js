@@ -1,5 +1,5 @@
 angular.module('starter')
-	.controller('RegisterCtrl', function($scope, $http, $ionicPopup) {
+	.controller('RegisterCtrl', function($scope, $http, $ionicPopup, SETTINGS_SYSTEM) {
 
 		$scope.user = {};
 
@@ -10,7 +10,7 @@ angular.module('starter')
 
 				$http({
 					method: 'POST',
-					url: 'http://cuentaamiga-samsax.c9users.io:8080/api/Usuarios',
+					url: SETTINGS_SYSTEM + '/Usuarios',
 					data: $scope.user
 				}).then(function successCallback(response) {
 					$ionicPopup.confirm({

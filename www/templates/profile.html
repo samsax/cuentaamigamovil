@@ -1,0 +1,66 @@
+<ion-view view-title="{{ 'KEY_PROFILE' | translate }}"  >
+<ion-content>      
+        
+        <br/>
+           <center>
+
+            <img class="circulo-profile" src="./img/dinero.jpg" >
+            <br/><br/>
+            <hr/><hr/><hr/>
+          </center>
+
+          
+          
+          <form action="action_page.php" name"formregister">
+           
+            <div class="list">
+              <div id='nombre_e' class='error'>Nombre invalido</div>
+              
+               <label class="item item-input input-profile">
+                    <span class="input-label">{{ 'KEY_NAME' | translate }}</span>
+                    <input type="text" ng-model="user.nombre">
+              </label>
+
+              <div id='nombre_e' class='error'>User Name invalido</div>
+               <label class="item item-input input-profile">
+                              <span class="input-label">{{ 'KEY_USER_NAME' | translate }}</span>
+                    <input type="text" ng-model="user.nickname">
+              </label>
+              
+            
+              <div id='correo_e' class='error'>Correo invalido</div>
+              <label class="item item-input input-profile">
+                              <span class="input-label">{{ 'KEY_EMAIL' | translate }}</span>
+                    <input type='email'  ng-model="user.correo">
+              </label>
+
+              <div id='contrasena_e' class='error'>Contraseña invalida</div>
+              <label class="item item-input input-profile">
+                              <span class="input-label">{{ 'KEY_PASSWORD' | translate }}</span>
+                    <input type='password'  ng-model="user.password">
+              </label>
+
+              <div ng-if="user.password != undefined && user.password != ''">
+                <div id='contrasena_e' class='error'>Verifique contraseña</div>
+                <label class="item item-input input-profile">
+                                <span class="input-label">{{ 'KEY_CHECK_PASSWORD' | translate }}</span>
+                      <input type='password'  ng-model="user.checkPassword">
+                </label>
+              </div>
+              
+             <br/>
+            
+            <hr/><hr/><hr/><br/>
+
+            
+            <center>
+              <button class= "button  button-block button-positive button-record" ng-click="update()" >{{ 'KEY_UPDATE' | translate }}</button>
+            </center>
+            
+           </div>
+          </form>          
+
+</ion-content>
+</ion-view>
+
+

@@ -1,6 +1,7 @@
 angular.module('starter')
-    .controller('LoginCtrl', function($scope, $ionicModal, $timeout, USER_ROLES, $http, $ionicPopup, $filter) {
+    .controller('LoginCtrl', function($scope, $ionicModal, $timeout, USER_ROLES, $http, $ionicPopup, $filter, SETTINGS_SYSTEM) {
 
+        $scope.checked = false;
         // Form data for the login modal
         $scope.loginData = {};
 
@@ -11,6 +12,7 @@ angular.module('starter')
         //      $scope.modal = modal;
         //  });
 
+
         // Triggered in the login modal to close it
         $scope.closeLogin = function() {
             $scope.modal.hide();
@@ -18,7 +20,8 @@ angular.module('starter')
 
         // Open the login modal
         $scope.login = function(user, password) {
-            url = "http://cuentaamiga-samsax.c9users.io:8080/api/Usuarios/getlogin?nickname=" + user + "&password=" + password;
+            url = SETTINGS_SYSTEM.url + "/Usuarios/getlogin?nickname=" + user + "&password=" + password;
+            $scope.checked = true;
             $http({
                 method: 'GET',
                 url: url,
@@ -26,6 +29,9 @@ angular.module('starter')
                 if (response.data.id != null) {
                     USER_ROLES.id = response.data.id.id;
                     USER_ROLES.name = response.data.id.nombre;
+                    USER_ROLES.user_name = response.data.id.nickname;
+                    USER_ROLES.email = response.data.id.correo;
+                    USER_ROLES.password = response.data.id.password;
                     USER_ROLES.authorized = true;
                 } else {
                     $ionicPopup.alert({
@@ -33,8 +39,9 @@ angular.module('starter')
                         template: $filter('translate')('KEY_MSG_USER_NOT_FOUND')
                     });
                 }
-
+                $scope.checked = false;
             }, function errorCallback(response) {
+                $scope.checked = false;
                 $ionicPopup.alert({
                     title: 'Error',
                     template: 'No es possible logar. Data: ' + response.data + '. Status Text: ' + response.statusText
@@ -58,4 +65,5 @@ angular.module('starter')
                 $scope.closeLogin();
             }, 1000);
         };
+
     });

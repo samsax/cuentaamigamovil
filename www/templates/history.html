@@ -1,74 +1,12 @@
-<ion-view view-title=" Cuentas a Pagar" >
+<ion-view view-title=" {{ 'KEY_HISTORY' | translate }}" >
     <ion-content>          	
 
-          <br/> 
-          <center>            
-            <select class="history-select" ng-model="accounts.userId">
-               <option  ng-repeat="user in users" value="{{user.id}}">
-                   {{user.nombre}}
-               </option>
-            </select>
-          </center>
-          
-           
-           <h2 class="title text-center">Cantidad</h2>
+        <br/>
+        <h2 class="title text-center">{{ 'KEY_HISTORY' | translate }}</h2>
 
-           <div class="card ">
-                      <div class="item item-divider  bar bar-calm">
-                            Total a Pagar:
-                      </div>
 
-                      <div class="item item-text-wrap">
-                          <div ng-if="totalPago.cantidad < totalDeb.cantidad">
-                            <strong>{{totalPago.nombre}}</strong> debe <strong>${{totalDeb.cantidad}}</strong> para <strong>{{totalDeb.nombre}}</strong>.
-                          </div>
-
-                          <div ng-if="totalPago.cantidad > totalDeb.cantidad">
-                            <strong>{{totalDeb.nombre}}</strong> debe <strong>${{totalPago.cantidad}}</strong> para <strong>{{totalPago.nombre}}</strong>.
-                          </div>
-
-                          <div ng-if="totalPago.cantidad == totalDeb.cantidad">
-                            Ninguna persona tienes que pagar.
-                          </div>
-                            
-                      </div>
-                  </div>
-            <center>
-            <button class= "button  button-block button-calm button-search" ng-click="pagar()">Atualizar</button>
-            </center>
-    		<br/>
-        <hr/>
-            <h2 class="title text-center">Historico</h2>
-
-            <div ng-repeat="object in accounts">
-                  
-                  <div class="card ">
-                      <div class="item item-divider  bar bar-positive" ng-if="totalPago.nombre == object.usuarioPago">
-                      <i class="icon ion-person"></i> {{object.usuarioPago}} <i class="icon ion-forward "></i>
-                        <i class="icon ion-person"></i> {{object.usuarioDebe}}
-                      </div>
-                      <div class="item item-divider  bar bar-royal" ng-if="totalDeb.nombre == object.usuarioPago">
-                        <i class="icon ion-person"></i>
-                        {{object.usuarioPago}} <i class="icon ion-forward"></i>
-                        <i class="icon ion-person"></i> {{object.usuarioDebe}}
-                      </div>
-
-                        <div class="item item-text-wrap">
-                              Cuenta: $ {{(object.cantidad).formatMoney(2, '.', ',')}}<br/>
-                              <div ng-if="object.fecha != null">Fecha: {{object.fecha}}</div> 
-                        </div>
-                  </div>
-            </div>
-
-             <div class="card ">
-                  <div class="item item-divider  bar bar-balanced">
-                        Ejemplo: Pago / Debe
-                  </div>
-
-                    <div class="item item-text-wrap">
-                          Cuenta: XXXXX
-                    </div>
-              </div>
+        <br/><br/><br/><br/>
+        <h2 class="title text-center">En construcción</h2>
           		    
     </ion-content>    
 </ion-view>

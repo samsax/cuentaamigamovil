@@ -1,0 +1,23 @@
+.circulo-profile {
+     width: 100px;
+     height: 100px;
+     border-radius: 30%;
+     margin-right: 20px;
+}
+
+.input-profile {
+
+  padding: 2px 11px 5px 13px;
+  text-overflow: ellipsis;
+  width: 95%;
+  
+  margin-left: 10px;
+}
+
+.input-profile, textarea:focus, input:focus, select:focus {
+    
+    border-top: 0 none;
+    border-left: 0 none;
+    border-right: 0 none;
+    
+} 

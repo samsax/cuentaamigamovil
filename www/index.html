@@ -12,6 +12,7 @@
     <link href="css/account.css" rel="stylesheet">
     <link href="css/register.css" rel="stylesheet">
     <link href="css/history.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -27,30 +28,42 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="js/controllers/index.js"></script>
     <script src="js/controllers/menu.js"></script>
     <script src="js/controllers/login.js"></script>
     <script src="js/controllers/main.js"></script>
+    <script src="js/controllers/bills_to_pay.js"></script>
     <script src="js/controllers/history.js"></script>
+    <script src="js/controllers/lost_password.js"></script>
     <script src="js/controllers/register.js"></script>
+    <script src="js/controllers/profile.js"></script>
     <script src="js/services.js"></script>
     <script src="js/contants.js"></script>
+
+    <!-- your app's directives js -->
+    <script src="js/directive/forceLowerCase.js"></script>
+
+    <!-- your app's libs js -->
+    <script src="lib/angular-elastic/elastic.js"></script>
 
     <!-- your app's TRANSLATE js -->
     <script src="lib/angular-translate/angular-translate.min.js"></script>
     <script src="js/locale/locale-mx.js"></script>
 </head>
 
-<body ng-app="starter">
+<body ng-app="starter" class="background-white">
+
+    <div ng-controller="IndexCtrl">
 
     <div ng-controller="LoginCtrl">
         
-        <div ng-show="!USER_ROLES.authorized">
+        <div ng-show="!USER_ROLES.authorized && !userRegister && !lostPassword">
             <div class="text-center taxi-club-label"><h1 class="text-center">{{ 'KEY_NAME_APLICACION' | translate }}</h1></div>
             <br />
             <form>
                 <label class="item item-input login">
                     <span class="input-label icon ion-person"></span>
-                    <input type="text" ng-model="user.name" placeholder="Usuário">
+                    <input type="text" ng-trim="true" ng-model="user.name" placeholder="Usuário" force-lower-case>
                 </label>
                 <br />
                 <label class="item item-input login">
@@ -58,12 +71,12 @@
                     <input type="password" ng-model="user.cpf" placeholder="Contraseña">
                 </label>
                 <br />
-                <button ng-click="login(user.name, user.cpf)" class="login button button-positive" type="submit">{{ 'KEY_LOGIN_IN' | translate }}</button>
+                <button ng-click="login(user.name, user.cpf)" class="login button button-positive" type="submit" ng-disabled="checked">{{ 'KEY_LOGIN_IN' | translate }}</button>
             </form>
             <br /><br />
-            <div class="text-center"><a href="#/app/register">{{ 'KEY_REGISTER_NOW' | translate }}</a></div>
+            <div class="text-center uppercase"><a href="" ng-click="register()" >{{ 'KEY_REGISTER_NOW' | translate }}</a></div>
             <br />
-            <div class="text-center"><a href="#/app/register">{{ 'KEY_LOST_YOUR_PASSWORD' | translate }}</a></div>
+            <div class="text-center uppercase"><a href="" ng-click="forgotPassword()">{{ 'KEY_LOST_YOUR_PASSWORD' | translate }}</a></div>
             <br />
             <div class="item-divider text-center">{{ 'KEY_OR_FROM' | translate }}</div>
 
@@ -80,11 +93,95 @@
                 <div class="col"></div>
             </div>
         </div>
-
         
         <div ng-if="USER_ROLES.authorized">
             <ion-nav-view></ion-nav-view>
         </div>
+
+        <div ng-controller="RegisterCtrl" ng-show="userRegister && !lostPassword">
+
+        <br/>
+                
+                <h1 class="title text-center">{{ 'KEY_REGISTER' | translate }}</h1>
+              
+                <br/>
+
+                <form action="action_page.php" name"formregister">
+                 
+                  <div class="list">
+                    <div id='nombre_e' class='error'>Nombre invalido</div>
+                    
+                     <label class="item item-input input-register">
+                                    <span class="input-label">{{ 'KEY_NAME' | translate }}</span>
+                          <input type="text" ng-model="user.nombre">
+                    </label>
+
+                    <div id='nombre_e' class='error'>User Name invalido</div>
+                     <label class="item item-input input-register">
+                                    <span class="input-label">{{ 'KEY_USER_NAME' | translate }}</span>
+                          <input type="text" ng-model="user.nickname">
+                    </label>
+                    
+                  
+                    <div id='correo_e' class='error'>Correo invalido</div>
+                    <label class="item item-input input-register">
+                                    <span class="input-label">{{ 'KEY_EMAIL' | translate }}</span>
+                          <input type='email'  ng-model="user.email">
+                    </label>
+                    
+                    <div id='contrasena_e' class='error'>Contraseña invalida</div>
+                    <label class="item item-input input-register">
+                                    <span class="input-label">{{ 'KEY_PASSWORD' | translate }}</span>
+                          <input type='password'  ng-model="user.password">
+                    </label>
+                    <div id='confirmacion_contrasena_e' class='error'>Verifique contraseña</div>
+                    <label class="item item-input input-register">
+                            <span class="input-label">{{ 'KEY_CHECK_PASSWORD' | translate }}</span>
+                          <input type='password'  ng-model="user.checkPassword">
+                    </label>
+
+                   <br/>
+
+                  <center>
+                    <button class= "button  button-block button-positive button-record" ng-click="salveUser()" >{{ 'KEY_RECORD' | translate }}</button>
+                  </center>
+                </div>
+
+                <h4 class="title return-register">
+                <i class="ion-arrow-return-left"></i> 
+                <a href="" ng-click="returnMain()" >
+                    <strong class="uppercase">{{ 'KEY_RETURN' | translate }}</strong>
+                </a>
+            </h4>
+        </div>
+
     </div>
+
+    <div ng-controller="LostPasswordCtrl" ng-if="lostPassword && !userRegister">
+
+        <br/>
+
+        <br/>
+        <h1 class="title text-center">{{ 'KEY_CHANGE_PASSWORD' | translate }}</h1>
+
+        <br/>
+        <label class="item item-input login">
+            <span class="input-label icon ion-email"></span>
+            <input type="password" ng-model="user.cpf" placeholder="Email">
+        </label>
+
+        <br/>
+        <button ng-click="sendEmail()" class="login button button-dark" >{{ 'KEY_CHANGE_PASSWORD' | translate }}</button>
+
+        <br/><br/>
+        <h4 class="title return-register">
+            <i class="ion-arrow-return-left"></i> 
+            <a href="" ng-click="returnMain()" >
+                <strong class="uppercase">{{ 'KEY_RETURN' | translate }}</strong>
+            </a>
+        </h4>
+
+    </div>
+
 </body>
 </html>

@@ -11,6 +11,10 @@ span {
     font-family: 'Raleway',Arial, Helvetica, sans-serif;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .img_bienvenido {
 	  width:100%;
     height:100%;
@@ -74,3 +78,11 @@ span {
   padding: 50px;
 }
 
+.return-register{
+  padding-left: 20px;
+}
+
+
+.background-white {
+  background: white;
+}

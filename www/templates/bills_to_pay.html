@@ -1,0 +1,86 @@
+<ion-view view-title=" {{ 'KEY_BILLS_TO_PAY' | translate }}" >
+    <ion-content>          	
+
+          <br/> 
+          <center>            
+            <select class="history-select" ng-model="accounts.userId">
+               <option  ng-repeat="user in users" value="{{user.id}}">
+                   {{user.nombre}}
+               </option>
+            </select>
+          </center>
+          
+           
+           <h2 class="title text-center">{{ 'KEY_QUANTITY' | translate }}</h2>
+
+           <div class="card ">
+                      <div class="item item-divider  bar bar-calm">
+                            {{ 'KEY_TOTAL_TO_PAY' | translate }}:
+                      </div>
+
+                      <div class="item item-text-wrap">
+                          <div ng-if="totalPago.cantidad < totalDeb.cantidad">
+                            <strong>{{checkName(totalPago.nombre)}}</strong> debe <strong>${{totalDeb.cantidad}}</strong> para <strong>{{checkName(totalDeb.nombre)}}</strong>.
+                          </div>
+
+                          <div ng-if="totalPago.cantidad > totalDeb.cantidad">
+                            <strong>{{checkName(totalDeb.nombre)}}</strong> debe <strong>${{totalPago.cantidad}}</strong> para <strong>{{checkName(totalPago.nombre)}}</strong>.
+                          </div>
+
+                          <div ng-if="totalPago.cantidad == totalDeb.cantidad">
+                            {{ 'KEY_MSG_NO_PERSON_HAVE_TO_PAY' | translate }}
+                          </div>
+                            
+                      </div>
+                  </div>
+            <center>
+            <button class= "button  button-block button-calm button-search" ng-click="update()" ng-disabled="checked">{{ 'KEY_UPDATE' | translate }}</button>
+            </center>
+    		<br/>
+        <hr/>
+            <h2 class="title text-center">{{ 'KEY_DETAILS' | translate }}</h2>
+
+            <div ng-repeat="object in accounts">
+                  
+                  <div class="card ">
+                      <div class="item item-divider  bar bar-positive" ng-if="totalPago.nombre == object.usuarioPago">
+                      <i class="icon ion-person"></i> {{object.usuarioPago}} <i class="icon ion-forward "></i>
+                        <i class="icon ion-person"></i> {{object.usuarioDebe}}
+                      </div>
+                      <div class="item item-divider  bar bar-royal" ng-if="totalDeb.nombre == object.usuarioPago">
+                        <i class="icon ion-person"></i>
+                        {{object.usuarioPago}} <i class="icon ion-forward"></i>
+                        <i class="icon ion-person"></i> {{object.usuarioDebe}}
+                      </div>
+
+                        <div class="item item-text-wrap">
+                              <strong>{{ 'KEY_ACCOUNT' | translate }}</strong>: {{ 'KEY_SYMBOL_MONEY' | translate }} {{(object.cantidad).formatMoney(2, '.', ',')}}<br/>
+                        </div>
+
+                        <div class="item item-text-wrap" ng-if="object.comentario.length > 0 ">
+                            <strong>{{ 'KEY_COMMENT' | translate }}</strong>: {{object.comentario}}
+                        </div>
+
+                        <div class="item item-text-wrap" ng-if="object.fecha != null">
+                            <strong>{{ 'KEY_DATE' | translate }}</strong>: {{formatDate(object.fecha)}}</div>
+                        </div>
+
+                  </div>
+            </div>
+
+             <div class="card ">
+                  <div class="item item-divider  bar bar-balanced">
+                        {{ 'KEY_EXEMPLE' | translate }}: {{ 'KEY_PAY_OWE' | translate }}
+                  </div>
+
+                    <div class="item item-text-wrap">
+                        {{ 'KEY_ACCOUNT' | translate }}: {{ 'KEY_SYMBOL_MONEY' | translate }} 0.00
+                    </div>
+
+                    <div class="item item-text-wrap">
+                        {{ 'KEY_COMMENT' | translate }}: {{ 'KEY_OBJECT_PLACE' | translate }}
+                    </div>
+              </div>
+          		    
+    </ion-content>    
+</ion-view>

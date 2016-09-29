@@ -1,14 +1,18 @@
-<ion-view view-title=" INICIO" >
+<ion-view view-title=" {{ 'KEY_MAIN' | translate }}" >
     <ion-content>          	
 
     		<br/>
-            <h1 class="title text-center">Sueldo</h1>
+            <h1 class="title text-center">{{ 'KEY_BALANCE' | translate }}</h1>
           
     		<br/>
 
     		<center>
+
+
+	            <select class="account-select" ng-options="user.id as user.nombre for user in users" ng-model="userSelected.id"></select>
+
 				<label class="item item-input input-value">
-	                    <span class="input-label">SUELDO</span>
+	                    <span class="input-label" style="text-transform: uppercase;">{{ 'KEY_BALANCE' | translate }}</span>
 	          			<input type="number" ng-model="account.sueldo">          			
 	    		</label>
 
@@ -19,15 +23,18 @@
 			      text-property="nombre"
 			      value-property="id"
 			      is-translate="false"
-			      text="Seleccione Amigos"
+			      text="{{ 'KEY_SELECT_FRIENDS' | translate }}"
 			      modal-template-url="lib/ionic-multiselect/dist/templates/modal-template.html"
 			      template-url="lib/ionic-multiselect/dist/templates/item-template.html"
 			      value-changed="onValueChanged(nombre)">
 			    </multiselect>
 
+				<textarea rows="2" msd-elastic ng-model="account.comentario" placeholder="{{ 'KEY_MSG_COMMENT' | translate }}"></textarea>
 				
-				<button class= "button  button-block button-positive button-search" ng-click="contabilizar()">Contabilizar 
+				<br/><br/>
+				<button class= "button  button-block button-positive button-search" ng-click="contabilizar()" ng-disabled="checked">{{ 'KEY_ACCOUNTING' | translate }}
 				</button>
+
 			</center>
 
     </ion-content>    

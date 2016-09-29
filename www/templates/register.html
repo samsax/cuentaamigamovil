@@ -3,7 +3,7 @@
 <ion-content>      
         
         <br/>
-            <h1 class="title text-center">Register</h1>
+            <h1 class="title text-center">{{ 'KEY_REGISTER' | translate }}</h1>
           
         <br/>
 
@@ -13,37 +13,39 @@
     <div id='nombre_e' class='error'>Nombre invalido</div>
     
      <label class="item item-input input-register">
-                    <span class="input-label">Nombre</span>
+                    <span class="input-label">{{ 'KEY_NAME' | translate }}</span>
           <input type="text" ng-model="user.nombre">
     </label>
 
     <div id='nombre_e' class='error'>User Name invalido</div>
      <label class="item item-input input-register">
-                    <span class="input-label">User Name</span>
+                    <span class="input-label">{{ 'KEY_USER_NAME' | translate }}</span>
           <input type="text" ng-model="user.nickname">
     </label>
     
   
     <div id='correo_e' class='error'>Correo invalido</div>
     <label class="item item-input input-register">
-                    <span class="input-label">Correo electronico</span>
-          <input type='email'  ng-model="user.email">
+                    <span class="input-label">{{ 'KEY_EMAIL' | translate }}</span>
+          <input type='email'  ng-model="user.correo">
     </label>
     
     <div id='contrasena_e' class='error'>Contraseña invalida</div>
     <label class="item item-input input-register">
-                    <span class="input-label">Contraseña</span>
+                    <span class="input-label">{{ 'KEY_PASSWORD' | translate }}</span>
           <input type='password'  ng-model="user.password">
     </label>
     <div id='confirmacion_contrasena_e' class='error'>Verifique contraseña</div>
     <label class="item item-input input-register">
-            <span class="input-label">Confirme contraseña</span>
+            <span class="input-label">{{ 'KEY_CHECK_PASSWORD' | translate }}</span>
           <input type='password'  ng-model="user.checkPassword">
     </label>
 
    <br/>
 
-    <input class= "button  button-block button-positive" ng-click="salveUser()" value="Registrar" > 
+  <center>
+    <button class= "button  button-block button-positive button-record" ng-click="salveUser()" >{{ 'KEY_RECORD' | translate }}</button>
+  </center>
   
  </div>
 </form>

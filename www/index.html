@@ -24,6 +24,10 @@
     <script src="lib/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
 
+    <!-- your app's lib FireBase js -->
+    <script src="lib/firebase/firebase.js"></script>
+    <script src="lib/angularfire/dist/angularfire.min.js"></script>
+
     <script src="lib/ionic-multiselect/dist/ionic-multiselect.min.js"></script>
 
     <!-- your app's js -->
@@ -59,6 +63,7 @@
     <div ng-controller="IndexCtrl">
 
     <div ng-controller="LoginCtrl">
+
         
         <div ng-show="!USER_ROLES.authorized && !userRegister && !lostPassword">
             <div class="text-center taxi-club-label"><h1 class="text-center">{{ 'KEY_NAME_APLICACION' | translate }}</h1></div>
@@ -87,7 +92,7 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
-                    <button class="button button-block button-large button-positive icon ion-social-facebook" type="submit"></button>
+                    <button class="button button-block button-large button-positive icon ion-social-facebook" ng-click="loginFacebook('facebook')"></button>
                 </div>
                 <div class="col"></div>
                 <div class="col">

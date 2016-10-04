@@ -1,16 +1,16 @@
 angular.module('starter')
-    .controller('LoginCtrl', function($scope, $ionicModal, $timeout, USER_ROLES, $http, $ionicPopup, $filter, SETTINGS_SYSTEM) {
+    .controller('LoginCtrl', function($scope, $ionicModal, $timeout, USER_ROLES, $http, $ionicPopup, $filter, $state, Users) {
 
         $scope.checked = false;
         // Form data for the login modal
         $scope.loginData = {};
 
-        // Create the login modal that we will use later
-        //$ionicModal.fromTemplateUrl('templates/login.html', {
-        //      scope: $scope
-        //   }).then(function (modal) {
-        //      $scope.modal = modal;
-        //  });
+        // Image default (Menu.html)
+        if (USER_ROLES.photo == undefined) {
+            $scope.showImage = true;
+        } else {
+            $scope.showImage = false;
+        }
 
 
         // Triggered in the login modal to close it
@@ -20,35 +20,76 @@ angular.module('starter')
 
         // Open the login modal
         $scope.login = function(user, password) {
-            url = SETTINGS_SYSTEM.url + "/Usuarios/getlogin?nickname=" + user + "&password=" + password;
+
             $scope.checked = true;
-            $http({
-                method: 'GET',
-                url: url,
-            }).then(function successCallback(response) {
-                if (response.data.id != null) {
-                    USER_ROLES.id = response.data.id.id;
-                    USER_ROLES.name = response.data.id.nombre;
-                    USER_ROLES.user_name = response.data.id.nickname;
-                    USER_ROLES.email = response.data.id.correo;
-                    USER_ROLES.password = response.data.id.password;
-                    USER_ROLES.authorized = true;
-                } else {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: $filter('translate')('KEY_MSG_USER_NOT_FOUND')
-                    });
-                }
+            Users.logIn({nickname:user, password: password}, function(response) {
+                var user = response.id;
+                 if (user != null) {
+                     USER_ROLES.id = user.id;
+                     USER_ROLES.name = user.nombre;
+                     USER_ROLES.user_name = user.nickname;
+                     USER_ROLES.email = user.correo;
+                     USER_ROLES.password = user.password;
+                     USER_ROLES.photo = user.photo;
+                     USER_ROLES.authorized = true;
+                 } else {
+                     $ionicPopup.alert({
+                         title: 'Error',
+                         template: $filter('translate')('KEY_MSG_USER_NOT_FOUND')
+                     });
+                 }
+                 $scope.checked = false;
+            }, function(error) {
                 $scope.checked = false;
-            }, function errorCallback(response) {
-                $scope.checked = false;
-                $ionicPopup.alert({
-                    title: 'Error',
-                    template: 'No es possible logar. Data: ' + response.data + '. Status Text: ' + response.statusText
-                });
+                 $ionicPopup.alert({
+                     title: 'Error',
+                     template: 'No es possible logar. Data: ' + response.data + '. Status Text: ' + response.statusText
+                 });
+
             });
 
         };
+
+
+        $scope.loginFacebook = function(authMethod) {
+            var provider = new firebase.auth.FacebookAuthProvider();
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+
+                // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                console.log(user);
+
+                //USER_ROLES.id = response.data.id.id;
+                USER_ROLES.name = user.displayName;
+                USER_ROLES.user_name = user.email;
+                USER_ROLES.email = user.email;
+                USER_ROLES.photo = user.photoURL;
+                USER_ROLES.password = '';
+                USER_ROLES.token = token;
+                USER_ROLES.authorized = true;
+
+                $state.reload();
+
+            }).catch(function(error) {
+
+                console.log(error);
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+                $ionicPopup.alert({
+                    title: 'Error',
+                    template: error.message
+                });
+            });
+
+        }
 
         $scope.logout = function() {
             console.log("Salindo");

@@ -23,6 +23,14 @@
               method: 'GET',
               isArray: true,
               globalError: false,
+            },
+            logIn: {
+              url: SETTINGS_SYSTEM.url + '/Usuarios/getlogin?nickname=:nickname&password=:password',
+              method: 'GET',
+              params: {
+                nickname: '@nickname',
+                password: '@password'
+              }
             }
           });
           return data;

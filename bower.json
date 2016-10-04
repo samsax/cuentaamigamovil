@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "angular-translate": "^2.11.1",
-    "angular-resource": "^1.5.8"
+    "angular-resource": "^1.5.8",
+    "firebase": "^3.4.1",
+    "angularfire": "^2.0.2"
   }
 }

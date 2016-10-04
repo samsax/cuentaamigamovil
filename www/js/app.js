@@ -1,8 +1,18 @@
-angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ionic-multiselect', 'monospaced.elastic', 'ngResource'])
+angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ionic-multiselect', 'monospaced.elastic', 'ngResource', 'firebase'])
 
-.run(function($ionicPlatform, USER_ROLES, $rootScope) {
+.run(function($ionicPlatform, USER_ROLES, $rootScope, SETTINGS_FIREBASE) {
     $rootScope.USER_ROLES = USER_ROLES;
     $ionicPlatform.ready(function() {
+
+      var config = {
+        apiKey: SETTINGS_FIREBASE.apiKey,
+        authDomain: SETTINGS_FIREBASE.authDomain,
+        databaseURL: SETTINGS_FIREBASE.databaseURL,
+        storageBucket: SETTINGS_FIREBASE.storageBucket,
+        messagingSenderId: SETTINGS_FIREBASE.messagingSenderId
+      };
+      firebase.initializeApp(config);
+
       if (window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);

@@ -1,5 +1,5 @@
 angular.module('starter')
-	.controller('MainCtrl', function($scope, USER_ROLES, $ionicPopup, $http, $filter, SETTINGS_SYSTEM) {
+	.controller('MainCtrl', function($scope, USER_ROLES, $ionicPopup, $http, $filter, SETTINGS_SYSTEM, Cuenta) {
 
 		$scope.users = [];
 		$scope.usersChecked = [];
@@ -30,7 +30,7 @@ angular.module('starter')
 
 		$scope.contabilizar = function() {
 
-			if(checkedFields()){
+			if (checkedFields()) {
 
 				$scope.usersChecked = [];
 				var total = 0;
@@ -41,7 +41,7 @@ angular.module('starter')
 				});
 
 				var d = new Date();
-				var fecha = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDay();
+				var fecha = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDay();
 
 				fecha += " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 
@@ -57,73 +57,71 @@ angular.module('starter')
 						});
 					}
 				});
-				
+
 				save($scope.usersChecked);
 			}
 		}
 
-		var checkedFields = function(){
+		var checkedFields = function() {
 
-			if ( $scope.userSelected.id == null ) {
+			if ($scope.userSelected.id == null) {
 
 				$ionicPopup.alert({
 					title: 'Error',
 					template: 'Selecione usuario que esta pagando.'
 				});
-				return false;	
+				return false;
 			}
 
-			if ( $scope.account.sueldo  == undefined || $scope.account.sueldo == '' ) {
+			if ($scope.account.sueldo == undefined || $scope.account.sueldo == '') {
 
 				$ionicPopup.alert({
 					title: 'Error',
 					template: 'Cuál valor deve ser pago.'
 				});
-				return false;	
+				return false;
 			}
 
-			
+
 			var bool = false;
 			for (var i = 0; i < $scope.users.length; i++) {
-				
+
 				if ($scope.users[i].checked != undefined && $scope.users[i].checked) {
 					var bool = true;
 					break;
 				}
 			}
-			if(!bool){
+			if (!bool) {
 				$ionicPopup.alert({
 					title: 'Error',
 					template: 'Selecione usuario que deve pagar.'
 				});
-				return false;	
+				return false;
 			}
 			return true;
 		}
 
 		var save = function(users) {
 			$scope.checked = true;
-			$http({
-				method: 'POST',
-				url: SETTINGS_SYSTEM.url + '/Cuenta',
-				data: users
-			}).then(function successCallback(response) {
+
+			Cuenta.saveCuenta(users[0], function(data) {
 				$ionicPopup.alert({
 					title: 'Éxito',
 					template: 'Guardado con éxito.'
 				});
 				$scope.checked = false;
 				limpiar();
-			}, function errorCallback(response) {
+			}, function(error) {
 				$scope.checked = false;
 				$ionicPopup.alert({
 					title: 'Error',
 					template: 'Error al guardar. ' + response
 				});
 			});
+
 		};
 
-		var limpiar = function(){
+		var limpiar = function() {
 			$scope.usersChecked = [];
 		}
 

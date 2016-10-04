@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('ProfileCtrl', function ($scope, USER_ROLES, $http, $ionicPopup, SETTINGS_SYSTEM) {
+    .controller('ProfileCtrl', function ($scope, USER_ROLES, $ionicPopup, Users) {
 
 
     	$scope.user = {};
@@ -21,23 +21,22 @@ angular.module('starter')
 			if(bool){
 				$scope.user.checkPassword = undefined;
 
-				console.log($scope.user);
+				console.log($scope.user); 
 
-				$http({
-					method: 'PUT',
-					url: SETTINGS_SYSTEM + '/Usuarios',
-					data: $scope.user
-				}).then(function successCallback(response) {
-					$ionicPopup.confirm({
+				Users.update($scope.user, function(data) {
+					//saves serializes $scope.entry object as JSON and sends as 
+					console.log(data);
+					$ionicPopup.alert({
 						title: 'Éxito',
-						template: 'Grabado con éxito.'
+						template: 'Atualizado con éxito.'
 					});
-				}, function errorCallback(response) {
-					$ionicPopup.confirm({
+				}, function(error) {
+					$ionicPopup.alert({
 						title: 'Error',
-						template: 'Error al tentar grabar.'
+						template: 'Error al tentar grabar. ' + error
 					});
-				});
+					
+				});			
 			}
 			
 		}

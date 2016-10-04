@@ -46,6 +46,9 @@
     <!-- your app's libs js -->
     <script src="lib/angular-elastic/elastic.js"></script>
 
+    <!-- your app's lib Request RestFull js -->
+    <script src="lib/angular-resource/angular-resource.min.js"></script>
+
     <!-- your app's TRANSLATE js -->
     <script src="lib/angular-translate/angular-translate.min.js"></script>
     <script src="js/locale/locale-mx.js"></script>
@@ -106,7 +109,7 @@
               
                 <br/>
 
-                <form action="action_page.php" name"formregister">
+                <form name"formregister">
                  
                   <div class="list">
                     <div id='nombre_e' class='error'>Nombre invalido</div>
@@ -126,7 +129,7 @@
                     <div id='correo_e' class='error'>Correo invalido</div>
                     <label class="item item-input input-register">
                                     <span class="input-label">{{ 'KEY_EMAIL' | translate }}</span>
-                          <input type='email'  ng-model="user.email">
+                          <input type='email'  ng-model="user.correo">
                     </label>
                     
                     <div id='contrasena_e' class='error'>Contraseña invalida</div>
@@ -143,7 +146,7 @@
                    <br/>
 
                   <center>
-                    <button class= "button  button-block button-positive button-record" ng-click="salveUser()" >{{ 'KEY_RECORD' | translate }}</button>
+                    <button ng-click="saveUser()" class="button button-record button-positive" >{{ 'KEY_RECORD' | translate }}</button>
                   </center>
                 </div>
 

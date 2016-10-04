@@ -1,34 +1,55 @@
     angular.module('starter')
-    .factory('Users', ['$resource',
-        function($resource) {
-          return $resource('http://localhost:8080/ProjetoRest/rest/cliente/:service/:id', {
-            id: '@id'
+      .factory('Users',
+        function($resource, SETTINGS_SYSTEM) {
+          var data = $resource(SETTINGS_SYSTEM.url + '/Usuarios/:id', {
+            id: '@_id'
           }, {
-            pages: {
-              method: 'GET',
-              isArray: false,
-              globalError: false,
-              params: {
-                service: ''
-              }
-            },
-            save: {
+            saveUser: {
               method: 'POST',
-              params: {
-                service: ''
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
               }
             },
             update: {
-              method: 'PUT',
-              params: {
-                service: ''
-              }
+              method: 'PUT'
             },
             findById: {
               method: 'GET',
               isArray: false,
               globalError: false,
+            },
+            findAll: {
+              method: 'GET',
+              isArray: true,
+              globalError: false,
             }
           });
+          return data;
         }
-      ]);
+      )
+      .factory('Cuenta',
+        function($resource, SETTINGS_SYSTEM) {
+          var data = $resource(SETTINGS_SYSTEM.url + '/Cuenta/:id', {
+            id: '@_id'
+          }, {
+            saveCuenta: {
+              method: 'POST',
+            },
+            update: {
+              method: 'PUT'
+            },
+            findById: {
+              method: 'GET',
+              isArray: false,
+              globalError: false,
+            },
+            findAll: {
+              method: 'GET',
+              isArray: true,
+              globalError: false,
+            }
+          });
+          return data;
+        }
+      )

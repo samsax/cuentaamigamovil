@@ -1,28 +1,30 @@
 angular.module('starter')
-	.controller('RegisterCtrl', function($scope, $http, $ionicPopup, SETTINGS_SYSTEM) {
+	.controller('RegisterCtrl', function($scope, $ionicPopup, Users) {
 
 		$scope.user = {};
 
-		$scope.salveUser = function() {
+		$scope.saveUser = function() {
 
 			if (validPassword($scope.user.password, $scope.user.checkPassword)) {
 				$scope.user.checkPassword = undefined;
 
-				$http({
-					method: 'POST',
-					url: SETTINGS_SYSTEM + '/Usuarios',
-					data: $scope.user
-				}).then(function successCallback(response) {
-					$ionicPopup.confirm({
-						title: 'Éxito',
-						template: 'Grabado con éxito.'
+
+				Users.save($scope.user, function(data) {
+					//saves serializes $scope.entry object as JSON and sends as 
+					console.log(data);
+					$ionicPopup.alert({
+						title: 'Sucesso',
+						template: 'Usuario grabado con sucesso.'
 					});
-				}, function errorCallback(response) {
-					$ionicPopup.confirm({
+					$scope.user = {};
+				}, function(error) {
+					$ionicPopup.alert({
 						title: 'Error',
-						template: 'Error al tentar grabar.'
+						template: 'Erro al grabar. ' + error.statusText
 					});
+					console.log(error);
 				});
+
 			}
 		}
 
@@ -39,5 +41,3 @@ angular.module('starter')
 		}
 
 	});
-
-

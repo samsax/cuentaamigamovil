@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ionic-multiselect', 'monospaced.elastic'])
+angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ionic-multiselect', 'monospaced.elastic', 'ngResource'])
 
 .run(function($ionicPlatform, USER_ROLES, $rootScope) {
     $rootScope.USER_ROLES = USER_ROLES;
@@ -74,6 +74,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ioni
         }
       });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/profile');
+    $urlRouterProvider.otherwise('/app/main');
 
   });

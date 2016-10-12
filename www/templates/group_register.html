@@ -1,0 +1,55 @@
+<ion-view view-title=" {{ 'KEY_REGISTER_GROUP' | translate }}" >
+    <ion-content>          	
+
+        <br/>
+		<center>
+		          <div ng-if="showImage">
+                <img class="circulo" src="./img/grupo.png" />
+              </div>
+              <div ng-if="!showImage">
+                <img class="circulo" src="{{group.foto}}" />
+              </div>
+		</center>
+        <br/><br/>
+        
+           
+            <div class="list">
+
+				              
+               <label class="item item-input input-profile">
+                    <span class="input-label">{{ 'KEY_NAME' | translate }}</span>
+                    <input type="text" ng-model="group.nombreGrupo">
+              </label>
+
+
+              <div id='contrasena_e' class='error'>Contraseña invalida</div>
+              <label class="item item-input input-profile">
+                              <span class="input-label">{{ 'KEY_PASSWORD' | translate }}</span>
+                    <input type='password'  ng-model="group.password">
+              </label>
+
+              
+            <div id='contrasena_e' class='error'>Verifique contraseña</div>
+            <label class="item item-input input-profile">
+                            <span class="input-label">{{ 'KEY_CHECK_PASSWORD' | translate }}</span>
+                  <input type='password'  ng-model="group.checkPassword">
+            </label>
+              
+
+              <div id='contrasena_e' class='error'>Contraseña invalida</div>
+              <label class="item item-input input-profile">
+                    <span class="input-label">{{ 'KEY_LINK_URL' | translate }}</span>
+                    <input type='text'  ng-model="group.foto" ng-change="changeImage()">
+              </label>
+              
+             <br/>            
+
+            
+            <center>
+              <button class= "button  button-block button-positive button-record" ng-click="saveGroup()" >{{ 'KEY_RECORD' | translate }}</button>
+            </center>
+            
+           </div>
+
+    </ion-content>    
+</ion-view>

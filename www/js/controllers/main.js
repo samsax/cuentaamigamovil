@@ -1,11 +1,13 @@
 angular.module('starter')
-	.controller('MainCtrl', function($scope, USER_ROLES, $ionicPopup, $http, $filter, SETTINGS_SYSTEM, Cuenta) {
+	.controller('MainCtrl', function($scope, USER_ROLES, $ionicPopup, $http, $filter, SETTINGS_SYSTEM, Cuenta, SendNotification, SETTINGS_FIREBASE) {
 
 		$scope.users = [];
 		$scope.usersChecked = [];
 		$scope.account = {};
 		$scope.checked = false;
 		$scope.userSelected = {};
+		$scope.notifications = [];
+
 
 		$scope.onValueChanged = function(value) {
 			//Value return a array objects with items selected
@@ -21,8 +23,8 @@ angular.module('starter')
 				$scope.users = response.data;
 			}, function errorCallback(response) {
 				$ionicPopup.alert({
-					title: 'Error',
-					template: 'Error en el servidor.'
+					title: $filter('translate')('KEY_ERROR'),
+					template: $filter('translate')('KEY_MSG_ERROR_SERVER')
 				});
 			});
 		}
@@ -58,7 +60,9 @@ angular.module('starter')
 					}
 				});
 
-				save($scope.usersChecked);
+				for (var i = 0; i < $scope.usersChecked.length; i++) {
+					save($scope.usersChecked[i]);
+				}
 			}
 		}
 
@@ -67,8 +71,8 @@ angular.module('starter')
 			if ($scope.userSelected.id == null) {
 
 				$ionicPopup.alert({
-					title: 'Error',
-					template: 'Selecione usuario que esta pagando.'
+					title: $filter('translate')('KEY_ERROR'),
+					template: $filter('translate')('KEY_MSG_ERROR_SELECT_USER')
 				});
 				return false;
 			}
@@ -76,8 +80,8 @@ angular.module('starter')
 			if ($scope.account.sueldo == undefined || $scope.account.sueldo == '') {
 
 				$ionicPopup.alert({
-					title: 'Error',
-					template: 'Cuál valor deve ser pago.'
+					title: $filter('translate')('KEY_ERROR'),
+					template: $filter('translate')('KEY_MSG_VALUE_MUST_BE_PAY')
 				});
 				return false;
 			}
@@ -94,28 +98,30 @@ angular.module('starter')
 			if (!bool) {
 				$ionicPopup.alert({
 					title: 'Error',
-					template: 'Selecione usuario que deve pagar.'
+					template: $filter('translate')('KEY_MSG_ERROR_SELECT_USER')
 				});
 				return false;
 			}
 			return true;
 		}
 
-		var save = function(users) {
+		var save = function(user) {
 			$scope.checked = true;
-
-			Cuenta.saveCuenta(users[0], function(data) {
+			Cuenta.saveCuenta(user, function(data) {
 				$ionicPopup.alert({
-					title: 'Éxito',
-					template: 'Guardado con éxito.'
+					title: $filter('translate')('KEY_SUCESS'),
+					template: $filter('translate')('KEY_MSG_RECORD_SUCCESS')
 				});
 				$scope.checked = false;
+				$scope.title = $filter('translate')('KEY_NAME_APLICACION_NORMAL');
+				$scope.body = searchUser(data.usuarioDebe) + $filter('translate')('KEY_OWE') + $filter('translate')('KEY_SYMBOL_MONEY') + data. cantidad + $filter('translate')('KEY_TO') + searchUser(data.usuarioPago) + ". " + $filter('translate')('KEY_COMMENT') + " " + user.comentario;
+				sendNotification($scope.title, $scope.body, []);
 				limpiar();
 			}, function(error) {
 				$scope.checked = false;
 				$ionicPopup.alert({
 					title: 'Error',
-					template: 'Error al guardar. ' + response
+					template: $filter('translate')('KEY_MSG_ERROR_RECORD')  + " " + error.statusText
 				});
 			});
 
@@ -123,6 +129,37 @@ angular.module('starter')
 
 		var limpiar = function() {
 			$scope.usersChecked = [];
+		}
+
+		var searchUser = function(userId) {
+			for (var i = 0; i < $scope.users.length; i++) {
+				if ($scope.users[i].id == userId) {
+					return $scope.users[i].nombre;
+				}
+			}
+			return "Indefinido";
+		};
+
+		var sendNotification = function(title, body, customData) {
+			// customData = [{"param": "fecha", "value": "2016-10-02 08:56:21"}, {param: ... , value: ...}, {param: ... , value: ...} ]
+			$scope.notification = {
+				"recipient": "all",
+				"isTopic": true,
+				"title": title,
+				"body": body,
+				"apiKey": SETTINGS_FIREBASE.apiKey,
+				"application": SETTINGS_FIREBASE.application,
+				"customData": customData
+			};
+			SendNotification.send($scope.notification, function(data) {
+				console.log(data);
+
+			}, function(error) {
+				$ionicPopup.alert({
+					title: 'Error',
+					template: $filter('translate')('KEY_MSG_ERROR_RECORD') + ' ' + error.statusText
+				});
+			});
 		}
 
 	});

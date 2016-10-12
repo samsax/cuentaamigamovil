@@ -24,7 +24,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ioni
 
     });
   })
-  .config(['$httpProvider', function($httpProvider) {
+  .config(['$httpProvider', function($httpProvider, $cordovaFacebookProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }])
@@ -40,6 +40,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ioni
       })
       .state('app.main', {
         url: '/main',
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: 'templates/main.html',
@@ -49,6 +50,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ioni
       })
       .state('app.register', {
         url: '/register',
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: 'templates/register.html',
@@ -58,6 +60,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ioni
       })
       .state('app.bills_to_pay', {
         url: '/bills_to_pay',
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: 'templates/bills_to_pay.html',
@@ -67,6 +70,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ioni
       })
       .state('app.history', {
         url: '/history',
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: 'templates/history.html',
@@ -74,8 +78,29 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'ioni
           }
         }
       })
+      .state('app.group_register', {
+        url: '/group_register',
+        cache: false,
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/group_register.html',
+            controller: 'GroupCtrl'
+          }
+        }
+      })
+      .state('app.my_group', {
+        url: '/my_group',
+        cache: false,
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/my_group.html',
+            controller: 'MyGroupCtrl'
+          }
+        }
+      })
       .state('app.profile', {
         url: '/profile',
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: 'templates/profile.html',

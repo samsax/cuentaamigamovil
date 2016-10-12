@@ -21,8 +21,12 @@
             <div class="col-md-3">
 
               
-              <img ng-if="showImage" class="circulo" src="./img/dinero.jpg" >
-              <img ng-if="!showImage" class="circulo" src="{{USER_ROLES.photo}}" >
+              <div ng-if="showImage">
+                <img class="circulo" src="./img/dinero.jpg" />
+              </div>
+              <div ng-if="!showImage">
+                <img class="circulo" src="{{USER_ROLES.photo}}" />
+              </div>
               
 
             </div>
@@ -63,6 +67,18 @@
       <ion-item menu-close href="#/app/register">
           <i class="icon ion-person-add"></i>
           {{ 'KEY_REGISTER' | translate }}
+        </ion-item>
+      </ion-list>
+
+      <ion-item menu-close href="#/app/my_group">
+          <i class="icon ion-cube"></i>
+          {{ 'KEY_MY_GROUP' | translate }}
+        </ion-item>
+      </ion-list>
+
+      <ion-item menu-close href="#/app/group_register">
+          <i class="icon ion-person-stalker"></i>
+          {{ 'KEY_REGISTER_GROUP' | translate }}
         </ion-item>
       </ion-list>
       

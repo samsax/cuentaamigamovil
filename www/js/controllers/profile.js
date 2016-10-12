@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('ProfileCtrl', function ($scope, USER_ROLES, $ionicPopup, Users) {
+    .controller('ProfileCtrl', function ($scope, USER_ROLES, $ionicPopup, Users, $filter) {
 
 
     	$scope.user = {};
@@ -7,6 +7,15 @@ angular.module('starter')
     	$scope.user.nombre = USER_ROLES.name;
     	$scope.user.nickname = USER_ROLES.user_name;
     	$scope.user.correo = USER_ROLES.email;
+    	$scope.user.foto = USER_ROLES.photo;
+
+    	 // Image default (Menu.html)
+        if (USER_ROLES.photo == undefined) {
+            $scope.showImage = true;
+        } else {
+            $scope.showImage = false;
+        }
+
 
 
 		$scope.update = function() {
@@ -27,13 +36,13 @@ angular.module('starter')
 					//saves serializes $scope.entry object as JSON and sends as 
 					console.log(data);
 					$ionicPopup.alert({
-						title: 'Éxito',
-						template: 'Atualizado con éxito.'
+						title: $filter('translate')('KEY_SUCESS'),
+						template: $filter('translate')('KEY_MSG_UPDATE_SUCESS')
 					});
 				}, function(error) {
 					$ionicPopup.alert({
 						title: 'Error',
-						template: 'Error al tentar grabar. ' + error
+						template: $filter('translate')('KEY_MSG_ERROR_RECORD') + error
 					});
 					
 				});			
@@ -45,8 +54,8 @@ angular.module('starter')
 		var validPassword = function(password, checkPassword) {
 			if (password != checkPassword) {
 				$ionicPopup.confirm({
-					title: 'Error',
-					template: 'Password estas diferente.'
+					title: $filter('translate')('KEY_ERROR'),
+					template: $filter('translate')('KEY_MSG_INCORRECT_PASSWORD')
 				});
 				return false;
 			}

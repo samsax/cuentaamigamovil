@@ -1,0 +1,44 @@
+<ion-view view-title=" {{ 'KEY_MY_GROUP' | translate }}" >
+    <ion-content>          	
+
+        <br/>
+        <h2 class="title text-center">{{ 'KEY_MY_GROUP' | translate }}</h2>
+
+		<center>
+
+    <div class="list card" ng-repeat="group in groups" ng-click="groupSelected(group.id, group.nombreGrupo)">
+      <div class="item item-avatar">
+        <img ng-if="showImage(group.foto)" src="{{group.foto}}">
+        <img ng-if="showImageDefault(group.foto)" src="./img/grupo.png">
+        <h2>{{group.nombreGrupo}}</h2>
+        <p>{{group.fecha}}</p>
+      </div>
+    </div>
+		
+          		    
+    </ion-content>    
+</ion-view>
+
+<script id="friends-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <center>
+        <h1 class="title">Amigos</h1>
+      </center>
+      <button class="button-calm"
+        ng-click="closeModal()">
+        <i class="ion-arrow-left-c"></i> Back
+      </button>
+    </ion-header-bar>
+    <ion-content>
+        
+        <ion-item class="item-checkbox" ng-repeat="item in friendsFacebook">
+          <label class="checkbox">
+            <input type="checkbox" ng-checked="item.checked" ng-model="item.checked">
+          </label>    
+          {{ item.name }} 
+      </ion-item>
+
+    </ion-content>
+  </ion-modal-view>
+</script>

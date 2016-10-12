@@ -3,11 +3,16 @@
 <ion-content>      
         
         <br/>
-            <h1 class="title text-center">{{ 'KEY_REGISTER' | translate }}</h1>
-          
-        <br/>
 
-<form name"formregister">
+    <center>
+              <div ng-if="showImage">
+                <img class="circulo" src="./img/dinero.jpg" />
+              </div>
+              <div ng-if="!showImage">
+                <img class="circulo" src="{{user.foto}}" />
+              </div>
+    </center>
+
  
   <div class="list">
     <div id='nombre_e' class='error'>Nombre invalido</div>
@@ -41,6 +46,15 @@
           <input type='password'  ng-model="user.checkPassword">
     </label>
 
+    <div id='confirmacion_contrasena_e' class='error'>Verifique contraseña</div>
+    <label class="item item-input input-register">
+            <span class="input-label">{{ 'KEY_LINK_URL' | translate }}</span>
+          <input type='text'  ng-model="user.foto" ng-change="changeImage()">
+    </label>
+
+    <br/>
+    
+
    <br/>
 
   <center>
@@ -48,7 +62,7 @@
   </center>
   
  </div>
-</form>
+
 
 </ion-content>
 </ion-view>

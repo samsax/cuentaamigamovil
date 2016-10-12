@@ -1,5 +1,5 @@
 angular.module('starter')
-	.controller('BillsToPayCtrl', function($scope, $http, $ionicPopup, USER_ROLES, SETTINGS_SYSTEM) {
+	.controller('BillsToPayCtrl', function($scope, $http, $ionicPopup, USER_ROLES, SETTINGS_SYSTEM, $filter) {
 
 
 		$scope.accounts = [];
@@ -24,8 +24,8 @@ angular.module('starter')
 
 			}, function errorCallback(response) {
 				$ionicPopup.alert({
-					title: 'Error',
-					template: 'Error en el servidor.'
+					title: $filter('translate')('KEY_ERROR'),
+					template: $filter('translate')('KEY_MSG_ERROR_SERVER')
 				});
 			});
 
@@ -71,8 +71,13 @@ angular.module('starter')
 
 
 				for (var i = 0; i < $scope.accounts.length; i++) {
-					$scope.accounts[i].usuarioPago = searchUser($scope.accounts[i].usuarioPago);
-					$scope.accounts[i].usuarioDebe = searchUser($scope.accounts[i].usuarioDebe);
+					var userPago = searchUser($scope.accounts[i].usuarioPago);
+					var userDebe = searchUser($scope.accounts[i].usuarioDebe);
+					$scope.accounts[i].usuarioPago = userPago.nombre;
+					$scope.accounts[i].fotoPago = userPago.foto;
+					
+					$scope.accounts[i].usuarioDebe = userDebe.nombre;
+					$scope.accounts[i].fotoDebe = userDebe.foto;
 				}
 
 
@@ -99,8 +104,8 @@ angular.module('starter')
 			}, function errorCallback(response) {
 				$scope.checked = false;
 				$ionicPopup.alert({
-					title: 'Error',
-					template: 'Error en el servidor.'
+					title: $filter('translate')('KEY_ERROR'),
+					template: $filter('translate')('KEY_MSG_ERROR_SERVER')
 				});
 			});
 		}
@@ -116,7 +121,7 @@ angular.module('starter')
 		var searchUser = function(userId) {
 			for (var i = 0; i < $scope.users.length; i++) {
 				if ($scope.users[i].id == userId) {
-					return $scope.users[i].nombre;
+					return $scope.users[i];
 				}
 			}
 			return "Indefinido";

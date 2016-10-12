@@ -8,6 +8,7 @@
     "angular-translate": "^2.11.1",
     "angular-resource": "^1.5.8",
     "firebase": "^3.4.1",
-    "angularfire": "^2.0.2"
+    "angularfire": "^2.0.2",
+    "facebookConnectPlugin": "https://cdn.rawgit.com/Wizcorp/phonegap-facebook-plugin/master/facebookConnectPlugin.js"
   }
 }

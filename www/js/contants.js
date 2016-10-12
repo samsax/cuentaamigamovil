@@ -7,14 +7,16 @@ angular.module('starter')
   password: '',
   photo: '',
   token: '',
+  grupo: '',
   admin: 'admin_role',
   public: 'public_role',
+
   authorized: false
 })
 .constant('SETTINGS_SYSTEM', {
 	//url: 'http://cuentaamiga-samsax.c9users.io:8080/api'
 
-  // https://cuentaamiga.herokuapp.com/explorer/#/
+  // https://cuentaamiga.herokuapp.com/explorer/#/  
 	url: 'https://cuentaamiga.herokuapp.com/api'
 })
 .constant('SETTINGS_FIREBASE', {
@@ -23,5 +25,10 @@ angular.module('starter')
   authDomain: "cuentaamigapushnotificacion.firebaseapp.com",
   databaseURL: "https://cuentaamigapushnotificacion.firebaseio.com",
   storageBucket: "cuentaamigapushnotificacion.appspot.com",
-  messagingSenderId: "655033536605"
+  messagingSenderId: "655033536605",
+  application: "com.ionicframework.cuentaamiga273895"
+})
+.constant('SETTINGS_NOTIFICATION', {
+  //https://cordova-plugin-fcm.appspot.com/
+  url: "https://cordova-plugin-fcm.appspot.com/push/freesend"
 });

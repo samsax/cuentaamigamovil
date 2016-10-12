@@ -1,5 +1,5 @@
-<ion-list>
-  <ion-item ng-click="showItems($event)">
+<ion-list class="list_multiselect">
+  <ion-item ng-click="showItems($event)" class="item-multiselect">
     <div ng-repeat="item in text | showTextData:this track by $index">
       {{ item }}
     </div>

@@ -13,6 +13,8 @@
     <link href="css/register.css" rel="stylesheet">
     <link href="css/history.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet">
+    <link href="css/group_register.css" rel="stylesheet">
+    <link href="css/bills_to_pay.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -27,6 +29,7 @@
     <!-- your app's lib FireBase js -->
     <script src="lib/firebase/firebase.js"></script>
     <script src="lib/angularfire/dist/angularfire.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <script src="lib/ionic-multiselect/dist/ionic-multiselect.min.js"></script>
 
@@ -41,6 +44,8 @@
     <script src="js/controllers/lost_password.js"></script>
     <script src="js/controllers/register.js"></script>
     <script src="js/controllers/profile.js"></script>
+    <script src="js/controllers/group_register.js"></script>
+    <script src="js/controllers/my_group.js"></script>
     <script src="js/services.js"></script>
     <script src="js/contants.js"></script>
 
@@ -53,14 +58,21 @@
     <!-- your app's lib Request RestFull js -->
     <script src="lib/angular-resource/angular-resource.min.js"></script>
 
+    
     <!-- your app's TRANSLATE js -->
     <script src="lib/angular-translate/angular-translate.min.js"></script>
     <script src="js/locale/locale-mx.js"></script>
+
+    <!-- your app's FACEBOOK js -->
+    <script src="lib/facebookConnectPlugin/index.js"></script>
+
 </head>
 
 <body ng-app="starter" class="background-white">
 
     <div ng-controller="IndexCtrl">
+
+    <div id="fb-root"></div>
 
     <div ng-controller="LoginCtrl">
 
@@ -92,11 +104,11 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
-                    <button class="button button-block button-large button-positive icon ion-social-facebook" ng-click="loginFacebook('facebook')"></button>
+                    <button class="button button-block button-large button-positive icon ion-social-facebook" ng-click="loginFacebook()"></button>
                 </div>
                 <div class="col"></div>
                 <div class="col">
-                    <button class="button button-block button-large button-assertive icon ion-social-googleplus" type="submit"></button>
+                    <button class="button button-block button-large button-assertive icon ion-social-googleplus" ng-click="loginGoogle('')"></button>
                 </div>
                 <div class="col"></div>
             </div>
@@ -110,7 +122,9 @@
 
         <br/>
                 
-                <h1 class="title text-center">{{ 'KEY_REGISTER' | translate }}</h1>
+                <center>
+                  <img class="circulo-profile" src="{{user.foto}}" />
+                </center>
               
                 <br/>
 
@@ -146,6 +160,12 @@
                     <label class="item item-input input-register">
                             <span class="input-label">{{ 'KEY_CHECK_PASSWORD' | translate }}</span>
                           <input type='password'  ng-model="user.checkPassword">
+                    </label>
+
+                    <div id='confirmacion_contrasena_e' class='error'>Verifique contraseña</div>
+                    <label class="item item-input input-register">
+                            <span class="input-label">{{ 'KEY_LINK_URL' | translate }}</span>
+                          <input type='password'  ng-model="user.foto">
                     </label>
 
                    <br/>

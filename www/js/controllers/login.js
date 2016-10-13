@@ -13,6 +13,12 @@ angular.module('starter')
             $scope.showImage = false;
         }
 
+        if (USER_ROLES.groupName == undefined) {
+            $scope.showGroupName = true;
+        } else {
+            $scope.showGroupName = false;
+        }
+
 
         // Triggered in the login modal to close it
         $scope.closeLogin = function() {

@@ -33,6 +33,13 @@
              <div class="col-md-12">
                  <h2>{{ 'KEY_WELCOME' | translate }},</h2>
                  <h2>{{USER_ROLES.name}}</h2>
+                 <br/>
+                 <div ng-if="showGroupName">
+                    <h3>{{ 'KEY_GROUP' | translate }}: {{ 'KEY_ENTER_GROUP' | translate }}</h3>
+                </div>
+                <div ng-if="!showGroupName">
+                  <h3>{{ 'KEY_GROUP' | translate }}: {{USER_ROLES.groupName}}</h3>
+                </div>
             </div>
           </div>          
         </ion-item>

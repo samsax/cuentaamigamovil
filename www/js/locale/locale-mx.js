@@ -56,6 +56,7 @@ angular.module('starter')
         'KEY_CHOOSE_OPTION' : 'Elija una opción',
         'KEY_ADD_USER' : 'Agregar Usuario',
         'KEY_CHANGE_USER' : 'Cambiar de Grupo',
+        'KEY_ENTER_GROUP' : 'Ingresse en un grupo',
 
         'KEY_MSG_USER_NOT_FOUND': 'Usuario no encontrado',
         'KEY_MSG_COMMENT': 'Escriba un comentario',

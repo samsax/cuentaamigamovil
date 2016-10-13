@@ -115,6 +115,13 @@
               params: {
                 id1: '@id1'
               }
+            },
+            getUsersByGroup: {
+              url: SETTINGS_SYSTEM.url + '/GrupoUsuarios/getusuarios?id1=:id1',
+              method: 'GET',
+              params: {
+                id1: '@id1'
+              }
             }
           });
           return data;

@@ -66,10 +66,11 @@
     <!-- your app's FACEBOOK js -->
     <script src="lib/facebookConnectPlugin/index.js"></script>
 
+
 </head>
 
 <body ng-app="starter" class="background-white">
-
+    
     <div ng-controller="IndexCtrl">
 
     <div id="fb-root"></div>
@@ -101,16 +102,24 @@
             <div class="item-divider text-center">{{ 'KEY_OR_FROM' | translate }}</div>
 
 
+
+            <div class="row">            
+                <div class="col">
+                
+                    <button class="button button-block button-large button-positive icon ion-social-facebook" ng-click="loginFacebook()"> Logar con Facebook</button>
+
+                </div>
+            </div>
             <div class="row">
-                <div class="col"></div>
-                <div class="col">
-                    <button class="button button-block button-large button-positive icon ion-social-facebook" ng-click="loginFacebook()"></button>
-                </div>
-                <div class="col"></div>
-                <div class="col">
-                    <button class="button button-block button-large button-assertive icon ion-social-googleplus" ng-click="loginGoogle('')"></button>
-                </div>
-                <div class="col"></div>
+                <script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.8&appId=1753441278256643";
+                        fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+                    </script>
+                    <div class="fb-login-button" data-max-rows="1"  data-show-faces="true" data-auto-logout-link="false"></div>
             </div>
         </div>
         

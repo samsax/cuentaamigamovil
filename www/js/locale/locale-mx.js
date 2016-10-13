@@ -44,7 +44,7 @@ angular.module('starter')
         'KEY_DATE': 'Fecha',
         'KEY_DETAILS': 'Detalles',
         'KEY_SUCESS':'Éxito',
-        'KEY_ERROR':'Error',
+        'KEY_ERROR':'Atención',
         'KEY_NAME': 'Nombre',
         'KEY_USER_NAME': 'Nickname',
         'KEY_EMAIL': 'Correo electrónico',
@@ -75,14 +75,21 @@ angular.module('starter')
         'KEY_MSG_ERROR_CONEXTION' : 'No tienes conexión con la internet.',
         'KEY_MSG_LOGOUT_USER' : 'Usuario deslogueado.',
         'KEY_MSG_ERROR_LOGOUT_USER' : 'Error al desloguear.',
-        'KEY_MSG_ERROR_SELECT_USER' : 'Selecione el usuario que pago.',
+        'KEY_MSG_ERROR_SELECT_USER' : 'Selecione los usuarios que van a pagar.',
         'KEY_MSG_VALUE_MUST_BE_PAY' : 'Ingresse el valor',
         'KEY_MSG_PLEASE_INSERT_USER_NAME' : 'Por favor utilize nickname',
         'KEY_MSG_DO_YOU_WANT_TO_CHANGE_GROUP' : 'Quieres cambiar para el grupo',
         'KEY_MSG_SUCESS_RECORD_USER' : 'Usuario guardado con exitó.',
+        'KEY_MSG_INVALID_FIELD' : 'Campo esta vazio',
+
+        'KEY_BUTTON_FACEBOOK': '//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.8&appId=1753441278256643',
 
       });
     $translateProvider.preferredLanguage('es-MX');
   });
 // HTML - {{ 'KEY_RETURN' | translate }}
 // Controllers: $filter  - $filter('translate')('KEY_EXEMPLE')
+
+
+//PT_BR  'KEY_BUTTON_FACEBOOK' : "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.8&appId=1753441278256643",
+//EN_US  'KEY_BUTTON_FACEBOOK' : "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1753441278256643",

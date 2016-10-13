@@ -22,37 +22,45 @@ angular.module('starter')
         // Open the login modal
         $scope.login = function(user, password) {
 
-            $scope.checked = true;
-            Users.logIn({
-                nickname: user,
-                password: password
-            }, function(response) {
-                var user = response.id;
-                if (user != null) {
-                    USER_ROLES.id = user.id;
-                    USER_ROLES.name = user.nombre;
-                    USER_ROLES.user_name = user.nickname;
-                    USER_ROLES.email = user.correo;
-                    USER_ROLES.photo = user.photo;
-                    USER_ROLES.token = '';
-                    USER_ROLES.grupoid = user.grupoid;
-                    USER_ROLES.authorized = true;
+            if (user && password) {
+                $scope.checked = true;
+                Users.logIn({
+                    nickname: user,
+                    password: password
+                }, function(response) {
+                    var user = response.id;
+                    if (user != null) {
+                        USER_ROLES.id = user.id;
+                        USER_ROLES.name = user.nombre;
+                        USER_ROLES.user_name = user.nickname;
+                        USER_ROLES.email = user.correo;
+                        USER_ROLES.photo = user.photo;
+                        USER_ROLES.token = '';
+                        USER_ROLES.grupoid = user.grupoid;
+                        USER_ROLES.authorized = true;
 
-                } else {
+                    } else {
+                        $ionicPopup.alert({
+                            title: $filter('translate')('KEY_ERROR'),
+                            template: $filter('translate')('KEY_MSG_USER_NOT_FOUND')
+                        });
+                    }
+                    $scope.checked = false;
+                }, function(error) {
+                    $scope.checked = false;
                     $ionicPopup.alert({
-                        title: 'Error',
-                        template: $filter('translate')('KEY_MSG_USER_NOT_FOUND')
+                        title: $filter('translate')('KEY_ERROR'),
+                        template: $filter('translate')('KEY_MSG_LOGIN_NOT_POSSIBLE')
                     });
-                }
-                $scope.checked = false;
-            }, function(error) {
-                $scope.checked = false;
-                $ionicPopup.alert({
-                    title:  $filter('translate')('KEY_ERROR'),
-                    template: $filter('translate')('KEY_MSG_LOGIN_NOT_POSSIBLE')
-                });
 
-            });
+                });
+            } else {
+                $ionicPopup.alert({
+                    title: $filter('translate')('KEY_ERROR'),
+                    template: $filter('translate')('KEY_MSG_INVALID_FIELD')
+                });
+            }
+
 
         };
 
@@ -83,13 +91,12 @@ angular.module('starter')
 
         $scope.loginFacebook = function() {
 
-
             $cordovaFacebook.login(["public_profile", "email", "user_friends"])
                 .then(function(success) {
                     USER_ROLES.token = success.authResponse.accessToken;
                     var credential = firebase.auth.FacebookAuthProvider.credential(success.authResponse.accessToken);
                     firebase.auth().signInWithCredential(credential).then(function(success) {
-                        console.log(success);
+                        //console.log(success);
                         $scope.successFirebase = success;
                         Users.getWithCorreo({
                             correo: success.email
@@ -125,11 +132,12 @@ angular.module('starter')
                                 USER_ROLES.user_name = user[0].nickname;
                                 USER_ROLES.email = user[0].correo;
                                 USER_ROLES.photo = user[0].foto;
-                                USER_ROLES.grupoid = user[0].grupoid;
+                                USER_ROLES.groupId = user[0].grupoid;
+                                USER_ROLES.groupName = user[0].grupoid;
                                 USER_ROLES.authorized = true;
                                 $state.reload();
                             }
-                            console.log(success);
+                            //console.log(success);
                         }, function(error) {
                             console.log(error);
                         });
@@ -150,6 +158,7 @@ angular.module('starter')
                 });
 
         }
+
 
         $scope.apiFacebook = function() {
             //me/friends?fields=picture.width(100).height(100)
@@ -201,17 +210,24 @@ angular.module('starter')
 
         $scope.logout = function() {
             USER_ROLES.authorized = false;
-            $cordovaFacebook.logout()
-                .then(function(success) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: $filter('translate')('KEY_MSG_LOGOUT_USER')
-                    });
-                }, function(error) {
-                    $ionicPopup.alert({
-                        title: $filter('translate')('KEY_ERROR'),
-                        template: $filter('translate')('KEY_MSG_ERROR_LOGOUT_USER')
-                    });
+
+            $cordovaFacebook.api('/me?fields=first_name', []).then(function(success) {
+                    $cordovaFacebook.logout()
+                        .then(function(success) {
+                            $ionicPopup.alert({
+                                title: $filter('translate')('KEY_ERROR'),
+                                template: $filter('translate')('KEY_MSG_LOGOUT_USER')
+                            });
+                        }, function(error) {
+                            $ionicPopup.alert({
+                                title: $filter('translate')('KEY_ERROR'),
+                                template: $filter('translate')('KEY_MSG_ERROR_LOGOUT_USER')
+                            });
+                        });
+                },
+                function(error) {
+                    //error
+                    //console.log(error);
                 });
         };
 

@@ -7,6 +7,7 @@ angular.module('starter')
 		$scope.totalPago = {};
 		$scope.totalDeb = {};
 		$scope.checked = false;
+		$scope.boolLoadUsers = true;
 
 		var searchHistory = function() {
 			var url = SETTINGS_SYSTEM.url + '/Cuenta/getcuentas?id1=' + USER_ROLES.id + '&id2=' + $scope.accounts.userId;

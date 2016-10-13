@@ -53,7 +53,9 @@ angular.module('starter')
 				id: USER_ROLES.id,
 				grupoid: grupoId
 			}, function(success) {
-				console.log(success);
+				//console.log(success);
+				USER_ROLES.groupId = success.id.grupoid;
+				USER_ROLES.groupName = groupName;
 				$ionicPopup.alert({
 					title: $filter('translate')('KEY_SUCESS'),
 					template: $filter('translate')('KEY_CHANGE_USER_GROUP') + ' ' + groupName + '.'
@@ -120,6 +122,33 @@ angular.module('starter')
 		});
 		// Execute action on remove modal
 		$scope.$on('modal.removed', function() {
+			// Execute action
+		});
+
+
+		//MODAL NEW GROUP
+		$ionicModal.fromTemplateUrl('new-group-modal.html', {
+			scope: $scope,
+			animation: 'slide-in-up'
+		}).then(function(newGroupModal) {
+			$scope.newGroupModal = newGroupModal;
+		});
+		$scope.openNewGroupModal = function() {
+			$scope.newGroupModal.show();
+		};
+		$scope.closeNewGroupModal = function() {
+			$scope.newGroupModal.hide();
+		};
+		// Cleanup the modal when we're done with it!
+		$scope.$on('$destroy', function() {
+			$scope.newGroupModal.remove();
+		});
+		// Execute action on hide modal
+		$scope.$on('newGroupModal.hidden', function() {
+			// Execute action
+		});
+		// Execute action on remove modal
+		$scope.$on('newGroupModal.removed', function() {
 			// Execute action
 		});
 

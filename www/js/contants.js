@@ -7,7 +7,8 @@ angular.module('starter')
   password: '',
   photo: '',
   token: '',
-  grupo: '',
+  groupId: '',
+  groupName: '',
   admin: 'admin_role',
   public: 'public_role',
 

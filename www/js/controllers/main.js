@@ -1,5 +1,5 @@
 angular.module('starter')
-	.controller('MainCtrl', function($scope, USER_ROLES, $ionicPopup, $http, $filter, SETTINGS_SYSTEM, Cuenta, SendNotification, SETTINGS_FIREBASE) {
+	.controller('MainCtrl', function($scope, USER_ROLES, $ionicPopup, $http, $filter, SETTINGS_SYSTEM, Cuenta, SendNotification, SETTINGS_FIREBASE, GroupUser) {
 
 		$scope.users = [];
 		$scope.usersChecked = [];
@@ -15,17 +15,14 @@ angular.module('starter')
 		};
 
 		var loadUsers = function() {
-			$http({
-				method: 'GET',
-				url: SETTINGS_SYSTEM.url + '/Usuarios',
-			}).then(function successCallback(response) {
+			GroupUser.getUsersByGroup({id1: USER_ROLES.groupId}, function(sucess){
+				console.log(sucess);
+				for (var i = 0; i < sucess.id.length; i++) {
+					$scope.users.push(sucess.id[i].usuarios);	
+				}
 				$scope.userSelected.id = USER_ROLES.id;
-				$scope.users = response.data;
-			}, function errorCallback(response) {
-				$ionicPopup.alert({
-					title: $filter('translate')('KEY_ERROR'),
-					template: $filter('translate')('KEY_MSG_ERROR_SERVER')
-				});
+			}, function(error){
+				console.log(error);
 			});
 		}
 		loadUsers();
